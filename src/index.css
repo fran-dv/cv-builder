@@ -3,3 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --primary-color: #077a7d;
+  --secondary-color: #f5eedd;
+  --accent-color: #7ae2cf;
+  --contrast-color: #06202b;
+
+  --secondary-font: "Montserrat", "sans-serif";
+}
+
+body {
+  background-color: #f5eedd;
+}
