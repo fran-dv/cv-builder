@@ -1,0 +1,56 @@
+.cv-preview {
+  --A4-size-ratio: 1 / 1.41421;
+  --A4-width: 210mm;
+  aspect-ratio: var(--A4-size-ratio);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 25rem;
+  max-width: var(--A4-width);
+  height: auto;
+  background-color: whitesmoke;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.name,
+.job-title,
+.cv-preview p {
+  font-family: var(--secondary-font);
+  color: var(--contrast-color);
+}
+
+.name {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.job-title {
+  font-weight: 400;
+  line-height: 1;
+  font-size: 1em;
+}
+
+.cv-preview p {
+  font-size: 0.6em;
+}
+
+.icon {
+  width: 0.9em;
+}
+
+.contact-list {
+  display: flex;
+  padding: 1em 0;
+  gap: 1em;
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-list li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
