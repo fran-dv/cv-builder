@@ -1,6 +1,6 @@
 import type { PersonalInfo } from "@/models";
 import "./CVPreview.css";
-import { Icon } from "./components";
+import { Icon } from "@/components";
 
 interface Props {
   personalInfo: PersonalInfo;

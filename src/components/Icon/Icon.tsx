@@ -2,15 +2,17 @@ interface IconsFiles {
   email: string;
   phone: string;
   city: string;
+  exit: string
 }
 
 const IconsFileNames: IconsFiles = {
   email: "email-icon.svg",
   phone: "phone-icon.svg",
   city: "city-icon.svg",
+  exit: "exit-icon.svg"
 } as const;
 
-type IconsTypes = keyof IconsFiles;
+export type IconsTypes = keyof IconsFiles;
 
 interface Props {
   type: IconsTypes;
