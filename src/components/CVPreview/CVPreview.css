@@ -2,16 +2,34 @@
   --A4-size-ratio: 1 / 1.41421;
   --A4-width: 210mm;
   aspect-ratio: var(--A4-size-ratio);
-  padding: 1.5rem 2rem;
+  padding: 9mm 11mm;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  min-width: 25rem;
+  flex: 1;
+  min-width: 310px;
   max-width: var(--A4-width);
   height: auto;
   background-color: whitesmoke;
   align-items: center;
-  font-size: 1rem;
+  inline-size: auto;
+  font-size: 12pt;
+
+  /* shrink font size in smallers screens */
+  @media (width <= 1490px) {
+    font-size: 10pt;
+  }
+
+  @media (width <= 1290px) {
+    font-size: 8pt;
+  }
+
+  @media (width <= 1100px) {
+    font-size: 6pt;
+  }
+
+  @media (width <= 800px) {
+    font-size: 4pt;
+  }
 }
 
 .name,
@@ -22,22 +40,23 @@
 }
 
 .name {
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: 600;
+  margin-bottom: 0.25em;
 }
 
 .job-title {
   font-weight: 400;
   line-height: 1;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 .cv-preview p {
-  font-size: 0.6em;
+  font-size: 0.9em;
 }
 
 .icon {
-  width: 0.9em;
+  width: 1.2em;
 }
 
 .contact-list {
@@ -52,5 +71,6 @@
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.25em;
 }
