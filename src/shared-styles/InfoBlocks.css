@@ -1,0 +1,79 @@
+.info-block {
+  background-color: var(--primary-color);
+  padding: 2rem 2.5rem;
+  border-radius: 0.75rem;
+  width: 70%;
+  position: relative;
+}
+
+.info-block .exit-button {
+  margin-left: auto;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.exit-button img {
+  filter: brightness(0) saturate(100%) invert(10%) sepia(9%) saturate(3770%)
+    hue-rotate(149deg) brightness(96%) contrast(98%);
+}
+
+.info-block form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.info-block label,
+.info-block input,
+.submit-button p {
+  font-family: var(--secondary-font);
+  color: var(--contrast-color);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.info-block label {
+  color: var(--primary-contrast-color);
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.submit-button,
+.info-block input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.info-block input {
+  border: none;
+  background-color: var(--primary-contrast-color);
+}
+
+.info-block input:focus {
+  outline: 2px solid var(--accent-color);
+}
+
+.submit-button {
+  border: none;
+  background-color: var(--accent-color);
+  margin-top: 1rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease-in-out;
+}
+
+.submit-button p {
+  font-weight: bolder;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  color: var(--primary-contrast-color);
+}
+
+.submit-button:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
