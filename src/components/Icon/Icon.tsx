@@ -2,14 +2,14 @@ interface IconsFiles {
   email: string;
   phone: string;
   city: string;
-  exit: string
+  exit: string;
 }
 
 const IconsFileNames: IconsFiles = {
   email: "email-icon.svg",
   phone: "phone-icon.svg",
   city: "city-icon.svg",
-  exit: "exit-icon.svg"
+  exit: "exit-icon.svg",
 } as const;
 
 export type IconsTypes = keyof IconsFiles;
