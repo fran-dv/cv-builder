@@ -1,12 +1,11 @@
-import type { callbackProps } from "@/components";
-import type { PersonalInfo } from "@/models";
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { InfoForm } from "@/components";
+import type { FormField, callbackProps } from "@/components";
+import type { CVData, CVDataProperty } from "@/models";
 import "@/shared-styles/InfoBlocks.css";
-import { IconButton } from "@/components";
 
 interface Props {
-  onChange: ({ personalInfo }: callbackProps) => void;
-  onSubmit: ({ personalInfo }: callbackProps) => void;
+  onChange: ({ data }: callbackProps) => void;
+  onSubmit: ({ data }: callbackProps) => void;
   onExitWithoutSubmit: () => void;
 }
 
@@ -18,7 +17,7 @@ const InputsIDs = {
   city: "city-input",
 } as const;
 
-const PersonalInfoFieldMap = {
+const PersonalInfoFieldMap: Record<string, keyof CVDataProperty> = {
   [InputsIDs.name]: "name",
   [InputsIDs.jobTitle]: "jobTitle",
   [InputsIDs.email]: "email",
@@ -26,110 +25,58 @@ const PersonalInfoFieldMap = {
   [InputsIDs.city]: "city",
 };
 
+const dataType: keyof CVData = "personalInfo";
+
+const formFields: Array<FormField> = [
+  {
+    id: InputsIDs.name,
+    name: PersonalInfoFieldMap[InputsIDs.name],
+    label: "Full name",
+    type: "text",
+    placeholder: "Enter your full name",
+  },
+  {
+    id: InputsIDs.jobTitle,
+    name: PersonalInfoFieldMap[InputsIDs.jobTitle],
+    label: "Job Title",
+    type: "text",
+    placeholder: "Enter your job title",
+  },
+  {
+    id: InputsIDs.email,
+    name: PersonalInfoFieldMap[InputsIDs.email],
+    label: "Email",
+    type: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    id: InputsIDs.phone,
+    name: PersonalInfoFieldMap[InputsIDs.phone],
+    label: "Phone",
+    type: "tel",
+    placeholder: "Enter your phone number",
+  },
+  {
+    id: InputsIDs.city,
+    name: PersonalInfoFieldMap[InputsIDs.city],
+    label: "City",
+    type: "text",
+    placeholder: "Enter your city",
+  },
+];
+
 export const PersonalInfoBlock = ({
   onChange,
   onSubmit,
   onExitWithoutSubmit,
 }: Props) => {
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({});
-  const formRef = useRef<HTMLFormElement | null>(null);
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    const newValue = id === InputsIDs.phone ? parseInt(value) : value;
-
-    if (!(id in PersonalInfoFieldMap)) {
-      console.error("Invalid input");
-      return;
-    }
-
-    const fieldName =
-      PersonalInfoFieldMap[id as keyof typeof PersonalInfoFieldMap];
-
-    setPersonalInfo((previous) => {
-      const updated = { ...previous, [fieldName]: newValue };
-      onChange({ personalInfo: updated });
-      return updated;
-    });
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSubmit({ personalInfo: personalInfo });
-  };
-
-  const handleClose = () => {
-    formRef.current?.reset();
-    onExitWithoutSubmit();
-  };
-
   return (
-    <div className="info-block">
-      <IconButton type="exit" onClick={handleClose} className="exit-button" />
-      <form action="" onSubmit={handleSubmit} ref={formRef}>
-        <div className="form-group">
-          <label htmlFor="name-input">
-            Full name:
-            <input
-              type="text"
-              id={InputsIDs.name}
-              name="name"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor={InputsIDs.jobTitle}>
-            Job title:
-            <input
-              type="text"
-              id={InputsIDs.jobTitle}
-              name="job-title"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor={InputsIDs.email}>
-            Email:
-            <input
-              type="email"
-              id={InputsIDs.email}
-              name="email"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor={InputsIDs.phone}>
-            Phone number:
-            <input
-              type="number"
-              id={InputsIDs.phone}
-              name="phone"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor={InputsIDs.city}>
-            City/Town
-            <input
-              type="text"
-              id={InputsIDs.city}
-              name="city"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-        <button type="submit" className="submit-button">
-          <p>Save</p>
-        </button>
-      </form>
-    </div>
+    <InfoForm
+      fields={formFields}
+      dataType={dataType}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      onExitWithoutSubmit={onExitWithoutSubmit}
+    />
   );
 };
