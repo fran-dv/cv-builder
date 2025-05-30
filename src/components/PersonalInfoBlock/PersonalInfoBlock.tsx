@@ -1,7 +1,6 @@
 import { InfoForm } from "@/components";
 import type { FormField, callbackProps } from "@/components";
 import type { CVData, CVDataProperty } from "@/models";
-import "@/shared-styles/InfoBlocks.css";
 
 interface Props {
   onChange: ({ data }: callbackProps) => void;

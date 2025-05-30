@@ -1,7 +1,7 @@
 import type { callbackProps } from "@/components";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { IconButton } from "@/components";
-import "@/shared-styles/InfoBlocks.css";
+import "./InfoForm.css";
 import type { CVData, CVDataProperty } from "@/models";
 
 export interface FormField {
