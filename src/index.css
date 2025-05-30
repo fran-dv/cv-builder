@@ -5,15 +5,15 @@
 }
 
 :root {
-  --primary-color: #437f97;
-  --secondary-color: #f5eedd;
-  --accent-color: #7ae2cf;
-  --contrast-color: #06202b;
-  --primary-contrast-color: #fff;
+  --primary-color: #fefefe;
+  --secondary-color: #06202b;
+  --secondary-contrast-color: #fff;
+  --accent-color: #437f97;
+  --neutral-color: #e9eced;
 
   --secondary-font: "Montserrat", "sans-serif";
 }
 
 body {
-  background-color: var(--contrast-color);
+  background-color: var(--secondary-color);
 }
