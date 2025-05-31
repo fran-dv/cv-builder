@@ -1,10 +1,18 @@
 .info-block {
+  --font-size-big-screens: 1.4rem;
+  --font-size-middle-screens: 1.1rem;
+  --font-size-small-screens: 1rem;
+
   background-color: var(--primary-color);
   padding: 2.5rem;
   border-radius: 2rem;
-  width: 70%;
+  width: 90%;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--general-shadow);
+
+  @media (width <= 1500px) {
+    width: 100%;
+  }
 }
 
 .info-block .exit-button {
@@ -31,7 +39,7 @@
 .submit-button p {
   font-family: var(--secondary-font);
   color: var(--secondary-color);
-  font-size: 1.4rem;
+  font-size: var(--font-size-big-screens);
   font-weight: 400;
 }
 
@@ -67,7 +75,7 @@
 
 .submit-button p {
   font-weight: bolder;
-  font-size: 1.7rem;
+  font-size: calc(var(--font-size-big-screens) + 0.2rem);
   letter-spacing: 2px;
   color: var(--secondary-contrast-color);
 }
@@ -76,4 +84,31 @@
   transform: scale(1.02);
   cursor: pointer;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (width <= 1200px) {
+  .info-block {
+    padding: 2rem;
+  }
+  .info-block label,
+  .info-block input {
+    font-size: var(--font-size-middle-screens);
+  }
+  .submit-button p {
+    font-size: calc(var(--font-size-middle-screens) + 0.2rem);
+  }
+}
+
+@media (width <= 400px) {
+  .info-block {
+    padding: 1.5rem;
+    min-width: none;
+  }
+  .info-block label,
+  .info-block input {
+    font-size: var(--font-size-small-screens);
+  }
+  .submit-button p {
+    font-size: calc(var(--font-size-small-screens) + 0.2rem);
+  }
 }

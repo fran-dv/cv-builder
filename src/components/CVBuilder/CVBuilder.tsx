@@ -1,7 +1,8 @@
-import { CVPreview, PersonalInfoBlock } from "@/components";
+import { CVPreview, IconButton, PersonalInfoBlock } from "@/components";
 import { type CVData, type CVDataProperty, emptyCVData } from "@/models";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./CVBuilder.css";
+import { useMediaQuery } from "usehooks-ts";
 
 export interface callbackProps {
   dataType: keyof CVData;
@@ -32,6 +33,9 @@ export const CVBuilder = () => {
   const [CVData, setCVData] = useState<CVData>(emptyCVData);
   const [CVCurrentPreviewData, setCVCurrentPreviewData] =
     useState<CVData>(CVData);
+  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+  const isDesktop = useMediaQuery("(min-width: 851px)");
+  const previewDialog = useRef<HTMLDialogElement | null>(null);
 
   const onInputChange = ({ data, dataType }: callbackProps) => {
     if (!data) {
@@ -85,6 +89,41 @@ export const CVBuilder = () => {
     setCVCurrentPreviewData(CVData);
   };
 
+  const handleDialogClose = () => {
+    previewDialog.current?.close();
+    previewDialog.current?.removeEventListener("click", handleBackdropClick);
+    setPreviewOpen(false);
+  };
+
+  const handleBackdropClick = (e: MouseEvent) => {
+    if (e.target === previewDialog.current) {
+      handleDialogClose();
+    }
+  };
+
+  // toggle preview button to small screens
+  const openDialog = () => {
+    console.log(previewOpen);
+    setPreviewOpen(true);
+
+    setTimeout(() => {
+      previewDialog.current?.showModal();
+      previewDialog.current?.addEventListener("click", handleBackdropClick);
+    }, 0);
+  };
+
+  const rightColumn = (
+    <div className="right-column">
+      <CVPreview
+        personalInfo={
+          CVCurrentPreviewData.personalInfo
+            ? CVCurrentPreviewData.personalInfo
+            : {}
+        }
+      />
+    </div>
+  );
+
   return (
     <>
       <div className="left-column">
@@ -94,15 +133,25 @@ export const CVBuilder = () => {
           onExitWithoutSubmit={onExitWithoutSave}
         />
       </div>
-      <div className="right-column">
-        <CVPreview
-          personalInfo={
-            CVCurrentPreviewData.personalInfo
-              ? CVCurrentPreviewData.personalInfo
-              : {}
-          }
+      {isDesktop && rightColumn}
+      {!isDesktop && previewOpen && (
+        <dialog
+          className="preview-dialog"
+          onClose={handleDialogClose}
+          ref={previewDialog}
+        >
+          {rightColumn}
+        </dialog>
+      )}
+
+      {!isDesktop && (
+        <IconButton
+          onClick={openDialog}
+          className="toggle-preview"
+          type="preview"
+          title="Show CV Preview"
         />
-      </div>
+      )}
     </>
   );
 };

@@ -12,6 +12,8 @@
   --neutral-color: #e9eced;
 
   --secondary-font: "Montserrat", "sans-serif";
+
+  --general-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 body {

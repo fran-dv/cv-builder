@@ -2,6 +2,18 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 4rem;
   padding: 4rem;
+}
+
+@media (width <= 1200px) {
+  main {
+    padding: 2rem;
+  }
+}
+
+@media (width <= 400px) {
+  main {
+    padding: 2rem 0.75rem;
+  }
 }
