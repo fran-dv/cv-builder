@@ -1,5 +1,5 @@
 import type { callbackProps } from "@/components";
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import React, { useState, type ChangeEvent, type FormEvent } from "react";
 import { IconButton } from "@/components";
 import "./InfoForm.css";
 import type { CVData, CVDataProperty } from "@/models";
@@ -19,7 +19,11 @@ interface Props<K extends keyof CVData> {
   onChange: ({ data, dataType }: callbackProps) => void;
   onSubmit: ({ data, dataType }: callbackProps) => void;
   onExitWithoutSubmit: () => void;
-  title?: string;
+  title: string;
+  isActive: boolean;
+  onShow: () => void;
+  blockIcon?: React.ReactNode;
+  currentData: CVData;
 }
 
 export const InfoForm = <K extends keyof CVData>({
@@ -28,10 +32,14 @@ export const InfoForm = <K extends keyof CVData>({
   onChange,
   onSubmit,
   onExitWithoutSubmit,
+  title,
+  isActive,
+  onShow,
+  blockIcon,
+  currentData,
 }: Props<K>) => {
   const initialValues = {};
   const [formValues, setFormValues] = useState<CVData[K]>(initialValues);
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,41 +54,57 @@ export const InfoForm = <K extends keyof CVData>({
   };
 
   const handleClose = () => {
-    //formRef.current?.reset();
-    setFormValues(initialValues);
+    setFormValues(currentData[dataType]);
     onExitWithoutSubmit();
   };
 
+  const showForm = () => {
+    onShow();
+  };
+
   return (
-    <div className="info-block">
-      <IconButton type="exit" onClick={handleClose} className="exit-button" />
-      <form onSubmit={handleSubmit} ref={formRef}>
-        {fields.map((field) => (
-          <div key={field.id} className="form-group">
-            <label htmlFor={field.id}>
-              {field.label}
-              <input
-                type={field.type}
-                id={field.id}
-                name={field.name}
-                value={
-                  formValues
-                    ? formValues[field.name]
-                      ? (formValues[field.name] as string | number)
-                      : ""
-                    : ""
-                }
-                onChange={handleInputChange}
-                required={field.required}
-                placeholder={field.placeholder}
-              />
-            </label>
-          </div>
-        ))}
-        <button type="submit" className="submit-button">
-          <p>Save</p>
-        </button>
-      </form>
+    <div className={`info-block ${isActive ? "expanded" : ""}`}>
+      <div className="closed-block">
+        {blockIcon}
+        <h2 className="block-title">{title}</h2>
+        <IconButton
+          onClick={isActive ? handleClose : showForm}
+          type="arrowDown"
+          className={`block-arrow-down ${isActive ? "rotated" : ""}`}
+        />
+      </div>
+
+      {isActive && (
+        <div>
+          <form onSubmit={handleSubmit}>
+            {fields.map((field) => (
+              <div key={field.id} className="form-group">
+                <label htmlFor={field.id}>
+                  {field.label}
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.name}
+                    value={
+                      formValues
+                        ? formValues[field.name]
+                          ? (formValues[field.name] as string | number)
+                          : ""
+                        : ""
+                    }
+                    onChange={handleInputChange}
+                    required={field.required}
+                    placeholder={field.placeholder}
+                  />
+                </label>
+              </div>
+            ))}
+            <button type="submit" className="submit-button">
+              <p>Save</p>
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

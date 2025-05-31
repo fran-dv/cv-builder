@@ -1,4 +1,4 @@
-import { InfoForm } from "@/components";
+import { Icon, InfoForm } from "@/components";
 import type { FormField, callbackProps } from "@/components";
 import type { CVData, CVDataProperty } from "@/models";
 
@@ -6,6 +6,9 @@ interface Props {
   onChange: ({ data }: callbackProps) => void;
   onSubmit: ({ data }: callbackProps) => void;
   onExitWithoutSubmit: () => void;
+  isActive: boolean;
+  onShow: () => void;
+  currentData: CVData;
 }
 
 const InputsIDs = {
@@ -68,6 +71,9 @@ export const PersonalInfoBlock = ({
   onChange,
   onSubmit,
   onExitWithoutSubmit,
+  isActive,
+  onShow,
+  currentData,
 }: Props) => {
   return (
     <InfoForm
@@ -76,6 +82,11 @@ export const PersonalInfoBlock = ({
       onChange={onChange}
       onSubmit={onSubmit}
       onExitWithoutSubmit={onExitWithoutSubmit}
+      isActive={isActive}
+      onShow={onShow}
+      title="Personal Information"
+      blockIcon={<Icon type="person" />}
+      currentData={currentData}
     />
   );
 };

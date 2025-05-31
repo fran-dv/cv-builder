@@ -10,7 +10,6 @@ export interface callbackProps {
 }
 
 const formDataToCVData = ({ data, dataType }: callbackProps): CVData | null => {
-  console.log("name: ", data?.name);
   let cvDataField: CVDataProperty;
   switch (dataType) {
     case "personalInfo":
@@ -36,6 +35,7 @@ export const CVBuilder = () => {
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width: 851px)");
   const previewDialog = useRef<HTMLDialogElement | null>(null);
+  const [activeBlockIndex, setActiveBlockIndex] = useState<number>(-1);
 
   const onInputChange = ({ data, dataType }: callbackProps) => {
     if (!data) {
@@ -53,8 +53,6 @@ export const CVBuilder = () => {
       return;
     }
 
-    console.log("cv data: ", newCVData);
-
     setCVCurrentPreviewData((prev) => {
       const prevSection = prev[dataType] ?? {};
       const newSection = newCVData[dataType] ?? {};
@@ -62,7 +60,7 @@ export const CVBuilder = () => {
       const filteredNewSection: Record<string, string | number> = {};
       for (const key in newSection) {
         const value = newSection[key as keyof CVDataProperty];
-        if (value !== undefined && value !== "") {
+        if (value !== undefined) {
           filteredNewSection[key] = value;
         }
       }
@@ -77,16 +75,22 @@ export const CVBuilder = () => {
     });
   };
 
+  const closeActiveBlock = () => {
+    setActiveBlockIndex(-1);
+  };
+
   const onSaveData = ({ data }: callbackProps) => {
     if (!data) {
       console.error("Any data was received");
       return;
     }
     setCVData(CVCurrentPreviewData);
+    closeActiveBlock();
   };
 
   const onExitWithoutSave = () => {
     setCVCurrentPreviewData(CVData);
+    closeActiveBlock();
   };
 
   const handleDialogClose = () => {
@@ -103,7 +107,6 @@ export const CVBuilder = () => {
 
   // toggle preview button to small screens
   const openDialog = () => {
-    console.log(previewOpen);
     setPreviewOpen(true);
 
     setTimeout(() => {
@@ -131,6 +134,9 @@ export const CVBuilder = () => {
           onChange={onInputChange}
           onSubmit={onSaveData}
           onExitWithoutSubmit={onExitWithoutSave}
+          isActive={activeBlockIndex === 0}
+          onShow={() => setActiveBlockIndex(0)}
+          currentData={CVData}
         />
       </div>
       {isDesktop && rightColumn}
