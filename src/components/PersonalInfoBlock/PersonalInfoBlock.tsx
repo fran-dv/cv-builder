@@ -1,6 +1,6 @@
 import { Icon, InfoForm } from "@/components";
 import type { FormField, callbackProps } from "@/components";
-import type { CVData, CVDataProperty } from "@/models";
+import type { CVData, CVDataPropertyKeys } from "@/models";
 
 interface Props {
   onChange: ({ data }: callbackProps) => void;
@@ -19,7 +19,7 @@ const InputsIDs = {
   city: "city-input",
 } as const;
 
-const PersonalInfoFieldMap: Record<string, keyof CVDataProperty> = {
+const PersonalInfoFieldMap: Record<string, CVDataPropertyKeys> = {
   [InputsIDs.name]: "name",
   [InputsIDs.jobTitle]: "jobTitle",
   [InputsIDs.email]: "email",

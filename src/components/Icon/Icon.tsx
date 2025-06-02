@@ -6,6 +6,7 @@ interface IconsFiles {
   preview: string;
   arrowDown: string;
   person: string;
+  summary: string;
 }
 
 const IconsFileNames: IconsFiles = {
@@ -16,6 +17,7 @@ const IconsFileNames: IconsFiles = {
   preview: "preview-icon.svg",
   arrowDown: "arrow-down-icon.svg",
   person: "person-icon.svg",
+  summary: "summary-icon.svg",
 } as const;
 
 export type IconsTypes = keyof IconsFiles;

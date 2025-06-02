@@ -4,3 +4,4 @@ export * from "./Icon";
 export * from "./IconButton";
 export * from "./CVBuilder";
 export * from "./InfoForm";
+export * from "./SummaryInfoBlock";

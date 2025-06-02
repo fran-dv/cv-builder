@@ -1,4 +1,9 @@
-import { CVPreview, IconButton, PersonalInfoBlock } from "@/components";
+import {
+  CVPreview,
+  IconButton,
+  PersonalInfoBlock,
+  SummaryInfoBlock,
+} from "@/components";
 import {
   type CVData,
   type CVDataProperty,
@@ -109,9 +114,19 @@ export const CVBuilder = () => {
             ? CVCurrentPreviewData.personalInfo
             : {}
         }
+        summaryInfo={
+          CVCurrentPreviewData.summaryInfo
+            ? CVCurrentPreviewData.summaryInfo
+            : {}
+        }
       />
     </div>
   );
+
+  const BlockIndexes = {
+    first: 0,
+    second: 1,
+  } as const;
 
   return (
     <>
@@ -120,8 +135,16 @@ export const CVBuilder = () => {
           onChange={onInputChange}
           onSubmit={onSaveData}
           onExitWithoutSubmit={onExitWithoutSave}
-          isActive={activeBlockIndex === 0}
-          onShow={() => setActiveBlockIndex(0)}
+          isActive={activeBlockIndex === BlockIndexes.first}
+          onShow={() => setActiveBlockIndex(BlockIndexes.first)}
+          currentData={CVData}
+        />
+        <SummaryInfoBlock
+          onChange={onInputChange}
+          onSubmit={onSaveData}
+          onExitWithoutSubmit={onExitWithoutSave}
+          isActive={activeBlockIndex === BlockIndexes.second}
+          onShow={() => setActiveBlockIndex(BlockIndexes.second)}
           currentData={CVData}
         />
       </div>

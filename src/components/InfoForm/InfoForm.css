@@ -4,7 +4,7 @@
   --font-size-small-screens: 1rem;
 
   background-color: var(--primary-color);
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 2rem;
   width: 90%;
   position: relative;
@@ -22,7 +22,8 @@
 .block-title,
 .info-block label,
 .info-block input,
-.submit-button p {
+.submit-button p,
+.info-block textarea {
   font-family: var(--secondary-font);
   color: var(--secondary-color);
   font-size: var(--font-size-big-screens);
@@ -89,17 +90,20 @@
 }
 
 .submit-button,
-.info-block input {
+.info-block input,
+.info-block textarea {
   padding: 0.75rem;
   border-radius: 1rem;
 }
 
-.info-block input {
+.info-block input,
+.info-block textarea {
   border: none;
   background-color: var(--neutral-color);
 }
 
-.info-block input:focus {
+.info-block input:focus,
+.info-block textarea:focus {
   outline: 2px solid var(--accent-color);
 }
 
@@ -129,7 +133,8 @@
     padding: 2rem;
   }
   .info-block label,
-  .info-block input {
+  .info-block input,
+  .info-block textarea {
     font-size: var(--font-size-middle-screens);
   }
   .submit-button p {
@@ -146,7 +151,8 @@
     min-width: none;
   }
   .info-block label,
-  .info-block input {
+  .info-block input,
+  .info-block textarea {
     font-size: var(--font-size-small-screens);
   }
   .submit-button p {

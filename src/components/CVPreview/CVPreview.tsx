@@ -1,13 +1,30 @@
-import type { PersonalInfo } from "@/models";
+import type { PersonalInfo, SummaryInfo } from "@/models";
 import "./CVPreview.css";
 import { Icon } from "@/components";
 
 interface Props {
   personalInfo: PersonalInfo;
+  summaryInfo: SummaryInfo;
 }
+
+interface CVSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const CVSection = ({ title, children }: CVSectionProps) => {
+  return (
+    <div className="cv-section">
+      <h2>{title}</h2>
+      <div className="divisor"></div>
+      {children}
+    </div>
+  );
+};
 
 export const CVPreview = ({
   personalInfo: { name, jobTitle, email, phone, city },
+  summaryInfo: { summary },
 }: Props) => {
   return (
     <div className="cv-preview">
@@ -33,6 +50,11 @@ export const CVPreview = ({
           </li>
         )}
       </ul>
+      {summary && (
+        <CVSection title="Summary">
+          <p>{summary}</p>
+        </CVSection>
+      )}
     </div>
   );
 };

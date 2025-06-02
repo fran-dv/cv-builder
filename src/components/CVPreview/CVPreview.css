@@ -36,7 +36,8 @@
 
 .name,
 .job-title,
-.cv-preview p {
+.cv-preview p,
+.cv-preview h2 {
   font-family: var(--secondary-font);
   color: var(--contrast-color);
 }
@@ -75,6 +76,20 @@
   align-items: center;
   justify-content: center;
   gap: 0.25em;
+}
+
+.cv-section {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  margin-top: 0.75rem;
+}
+
+.divisor {
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+  margin-bottom: 0.5rem;
 }
 
 @media print {

@@ -2,11 +2,11 @@ import type { callbackProps } from "@/components";
 import React, { useState, type ChangeEvent, type FormEvent } from "react";
 import { IconButton } from "@/components";
 import "./InfoForm.css";
-import type { CVData, CVDataProperty } from "@/models";
+import type { CVData, CVDataPropertyKeys } from "@/models";
 
 export interface FormField {
   id: string;
-  name: keyof CVDataProperty;
+  name: CVDataPropertyKeys;
   label: string;
   type: string;
   placeholder?: string;
@@ -41,7 +41,9 @@ export const InfoForm = <K extends keyof CVData>({
   const initialValues = {};
   const [formValues, setFormValues] = useState<CVData[K]>(initialValues);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     const updated = { ...formValues, [name]: value };
     setFormValues(updated);
@@ -77,28 +79,48 @@ export const InfoForm = <K extends keyof CVData>({
       {isActive && (
         <div>
           <form onSubmit={handleSubmit}>
-            {fields.map((field) => (
-              <div key={field.id} className="form-group">
-                <label htmlFor={field.id}>
-                  {field.label}
-                  <input
-                    type={field.type}
-                    id={field.id}
-                    name={field.name}
-                    value={
-                      formValues
-                        ? formValues[field.name]
-                          ? (formValues[field.name] as string | number)
-                          : ""
-                        : ""
-                    }
-                    onChange={handleInputChange}
-                    required={field.required}
-                    placeholder={field.placeholder}
-                  />
-                </label>
-              </div>
-            ))}
+            {fields.map((field) => {
+              const currentFieldValue = formValues
+                ? (formValues as typeof dataType)[
+                    field.name as keyof typeof dataType
+                  ]
+                  ? ((formValues as typeof dataType)[
+                      field.name as keyof typeof dataType
+                    ] as string | number)
+                  : ""
+                : "";
+              return (
+                <div key={field.id} className="form-group">
+                  <label htmlFor={field.id}>
+                    {field.label}
+                    {field.type === "textarea" ? (
+                      <textarea
+                        id={field.id}
+                        name={field.name}
+                        value={currentFieldValue}
+                        onChange={handleInputChange}
+                        required={field.required}
+                        placeholder={field.placeholder}
+                        maxLength={1200}
+                        rows={5}
+                        cols={10}
+                        style={{ resize: "none" }}
+                      />
+                    ) : (
+                      <input
+                        type={field.type}
+                        id={field.id}
+                        name={field.name}
+                        value={currentFieldValue}
+                        onChange={handleInputChange}
+                        required={field.required}
+                        placeholder={field.placeholder}
+                      />
+                    )}
+                  </label>
+                </div>
+              );
+            })}
             <button type="submit" className="submit-button">
               <p>Save</p>
             </button>
