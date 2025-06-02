@@ -1,5 +1,10 @@
 import { CVPreview, IconButton, PersonalInfoBlock } from "@/components";
-import { type CVData, type CVDataProperty, emptyCVData } from "@/models";
+import {
+  type CVData,
+  type CVDataProperty,
+  emptyCVData,
+  formDataToCVData,
+} from "@/models";
 import { useRef, useState } from "react";
 import "./CVBuilder.css";
 import { useMediaQuery } from "usehooks-ts";
@@ -9,33 +14,14 @@ export interface callbackProps {
   data?: CVDataProperty;
 }
 
-const formDataToCVData = ({ data, dataType }: callbackProps): CVData | null => {
-  let cvDataField: CVDataProperty;
-  switch (dataType) {
-    case "personalInfo":
-      cvDataField = {
-        name: data?.name as string | undefined,
-        jobTitle: data?.jobTitle as string | undefined,
-        email: data?.email as string | undefined,
-        phone: data?.phone ? Number(data.phone) : undefined,
-        city: data?.city as string | undefined,
-      };
-      break;
-  }
-
-  return {
-    [dataType]: cvDataField!,
-  };
-};
-
 export const CVBuilder = () => {
   const [CVData, setCVData] = useState<CVData>(emptyCVData);
   const [CVCurrentPreviewData, setCVCurrentPreviewData] =
     useState<CVData>(CVData);
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
-  const isDesktop = useMediaQuery("(min-width: 851px)");
-  const previewDialog = useRef<HTMLDialogElement | null>(null);
   const [activeBlockIndex, setActiveBlockIndex] = useState<number>(-1);
+  const previewDialog = useRef<HTMLDialogElement | null>(null);
+  const isDesktop = useMediaQuery("(min-width: 850px)");
 
   const onInputChange = ({ data, dataType }: callbackProps) => {
     if (!data) {
@@ -105,7 +91,7 @@ export const CVBuilder = () => {
     }
   };
 
-  // toggle preview button to small screens
+  // preview toggle button to small screens
   const openDialog = () => {
     setPreviewOpen(true);
 
