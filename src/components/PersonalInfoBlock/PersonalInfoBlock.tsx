@@ -1,4 +1,4 @@
-import { Icon, InfoForm } from "@/components";
+import { FormAccordion, Icon } from "@/components";
 import type { FormField, callbackProps } from "@/components";
 import type { CVData, CVDataPropertyKeys } from "@/models";
 
@@ -76,7 +76,7 @@ export const PersonalInfoBlock = ({
   currentData,
 }: Props) => {
   return (
-    <InfoForm
+    <FormAccordion
       fields={formFields}
       dataType={dataType}
       onChange={onChange}

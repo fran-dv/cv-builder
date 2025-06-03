@@ -1,6 +1,6 @@
 import {
+  FormAccordion,
   Icon,
-  InfoForm,
   type callbackProps,
   type FormField,
 } from "@/components";
@@ -34,7 +34,7 @@ export const SummaryInfoBlock = ({
   currentData,
 }: Props) => {
   return (
-    <InfoForm
+    <FormAccordion
       fields={fields}
       dataType="summaryInfo"
       onChange={onChange}

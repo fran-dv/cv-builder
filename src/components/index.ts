@@ -3,5 +3,6 @@ export * from "./PersonalInfoBlock";
 export * from "./Icon";
 export * from "./IconButton";
 export * from "./CVBuilder";
-export * from "./InfoForm";
+export * from "./Form";
+export * from "./FormAccordion";
 export * from "./SummaryInfoBlock";
