@@ -4,6 +4,7 @@ import {
   PersonalInfoBlock,
   SummaryInfoBlock,
   ExperiencesInfoBlock,
+  EducationInfoBlock,
 } from "@/components";
 import {
   type CVData,
@@ -133,6 +134,7 @@ export const CVBuilder = () => {
     first: 0,
     second: 1,
     third: 2,
+    fourth: 3,
   } as const;
 
   return (
@@ -160,6 +162,14 @@ export const CVBuilder = () => {
           onExitWithoutSubmit={onExitWithoutSave}
           isActive={activeBlockIndex === BlockIndexes.third}
           onShow={() => setActiveBlockIndex(BlockIndexes.third)}
+          currentData={CVData}
+        />
+        <EducationInfoBlock
+          onChange={onInputChange}
+          onSubmit={onSaveData}
+          onExitWithoutSubmit={onExitWithoutSave}
+          isActive={activeBlockIndex === BlockIndexes.fourth}
+          onShow={() => setActiveBlockIndex(BlockIndexes.fourth)}
           currentData={CVData}
         />
       </div>
