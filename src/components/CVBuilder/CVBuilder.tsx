@@ -3,6 +3,7 @@ import {
   IconButton,
   PersonalInfoBlock,
   SummaryInfoBlock,
+  ExperiencesInfoBlock,
 } from "@/components";
 import {
   type CVData,
@@ -48,19 +49,11 @@ export const CVBuilder = () => {
       const prevSection = prev[dataType] ?? {};
       const newSection = newCVData[dataType] ?? {};
 
-      const filteredNewSection: Record<string, string | number> = {};
-      for (const key in newSection) {
-        const value = newSection[key as keyof CVDataProperty];
-        if (value !== undefined) {
-          filteredNewSection[key] = value;
-        }
-      }
-
       return {
         ...prev,
         [dataType]: {
           ...prevSection,
-          ...filteredNewSection,
+          ...newSection,
         },
       };
     });
@@ -70,13 +63,11 @@ export const CVBuilder = () => {
     setActiveBlockIndex(-1);
   };
 
-  const onSaveData = ({ data }: callbackProps) => {
-    if (!data) {
-      console.error("Any data was received");
-      return;
-    }
+  const onSaveData = (close: boolean = true) => {
     setCVData(CVCurrentPreviewData);
-    closeActiveBlock();
+    if (close) {
+      closeActiveBlock();
+    }
   };
 
   const onExitWithoutSave = () => {
@@ -119,6 +110,21 @@ export const CVBuilder = () => {
             ? CVCurrentPreviewData.summaryInfo
             : {}
         }
+        experienceInfo1={
+          CVCurrentPreviewData.experienceInfo1
+            ? CVCurrentPreviewData.experienceInfo1
+            : {}
+        }
+        experienceInfo2={
+          CVCurrentPreviewData.experienceInfo2
+            ? CVCurrentPreviewData.experienceInfo2
+            : {}
+        }
+        experienceInfo3={
+          CVCurrentPreviewData.experienceInfo3
+            ? CVCurrentPreviewData.experienceInfo3
+            : {}
+        }
       />
     </div>
   );
@@ -126,6 +132,7 @@ export const CVBuilder = () => {
   const BlockIndexes = {
     first: 0,
     second: 1,
+    third: 2,
   } as const;
 
   return (
@@ -145,6 +152,14 @@ export const CVBuilder = () => {
           onExitWithoutSubmit={onExitWithoutSave}
           isActive={activeBlockIndex === BlockIndexes.second}
           onShow={() => setActiveBlockIndex(BlockIndexes.second)}
+          currentData={CVData}
+        />
+        <ExperiencesInfoBlock
+          onChange={onInputChange}
+          onSubmit={onSaveData}
+          onExitWithoutSubmit={onExitWithoutSave}
+          isActive={activeBlockIndex === BlockIndexes.third}
+          onShow={() => setActiveBlockIndex(BlockIndexes.third)}
           currentData={CVData}
         />
       </div>
