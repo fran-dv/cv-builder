@@ -2,6 +2,7 @@ import type { callbackProps } from "@/components";
 import type { CVData, CVDataProperty } from "./cv-data";
 import type { PersonalInfo } from "./personal-info";
 import type { SummaryInfo } from "./summary-info";
+import type { ExperienceInfo } from "./experience-info";
 
 export const formDataToCVData = ({
   data,
@@ -28,6 +29,22 @@ export const formDataToCVData = ({
     const dataToFormat = data as SummaryInfo;
     cvDataField = {
       summary: dataToFormat.summary as string | undefined,
+    };
+  }
+
+  if (
+    dataType === "experienceInfo1" ||
+    dataType === "experienceInfo2" ||
+    dataType === "experienceInfo3"
+  ) {
+    const dataToFormat = data as ExperienceInfo;
+    cvDataField = {
+      jobTitle: dataToFormat.jobTitle,
+      city: dataToFormat.city,
+      employer: dataToFormat.employer,
+      startDate: dataToFormat.startDate,
+      finishDate: dataToFormat.finishDate,
+      description: dataToFormat.description,
     };
   }
 
