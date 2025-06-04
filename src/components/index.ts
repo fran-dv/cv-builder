@@ -8,3 +8,4 @@ export * from "./FormAccordion";
 export * from "./SummaryInfoBlock";
 export * from "./ExperiencesInfoBlock";
 export * from "./Item";
+export * from "./EducationInfoBlock";

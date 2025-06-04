@@ -132,7 +132,10 @@ export const FormAccordion = <K extends keyof CVData>({
           {existingItems?.map((item) => {
             if (!item) return null;
 
-            if (isExperienceInfo(item.value)) {
+            if (
+              isExperienceInfo(item.value) &&
+              ("jobTitle" in item.value || "employer" in item.value)
+            ) {
               const value = item.value;
               return (
                 <Item
