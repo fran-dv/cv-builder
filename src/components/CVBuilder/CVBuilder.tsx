@@ -36,6 +36,18 @@ export const CVBuilder = () => {
       return;
     }
 
+    // handle items deletion
+    if (Object.keys(data).length === 0) {
+      setCVCurrentPreviewData((prev) => {
+        const newState = { ...prev };
+        newState[dataType] = {};
+        // save the deletion
+        setCVData(newState);
+        return newState;
+      });
+      return;
+    }
+
     const newCVData: CVData | null = formDataToCVData({
       data: data,
       dataType: dataType,

@@ -94,7 +94,6 @@ export const FormAccordion = <K extends keyof CVData>({
 
     // update currentData from parent
     onChange({ data: {}, dataType: key });
-    onSubmit(false);
   };
 
   const nextSlot = findFirstFreeItemSlot(existingItems);
