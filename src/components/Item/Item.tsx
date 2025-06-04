@@ -1,7 +1,6 @@
 import { IconButton } from "@/components";
 
 interface Props {
-  id: string;
   deleteCallback: () => void;
   title?: string;
   subtitle?: string;
@@ -12,7 +11,6 @@ interface Props {
 }
 
 export const Item = ({
-  id,
   deleteCallback,
   title,
   subtitle,
@@ -22,7 +20,7 @@ export const Item = ({
   description,
 }: Props) => {
   return (
-    <div key={id} className="item-container">
+    <div className="item-container">
       <IconButton
         type="delete"
         onClick={deleteCallback}

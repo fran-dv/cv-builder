@@ -132,6 +132,8 @@ export const FormAccordion = <K extends keyof CVData>({
           {existingItems?.map((item) => {
             if (!item) return null;
 
+            const uniqueKey = item.id;
+
             if (
               isExperienceInfo(item.value) &&
               ("jobTitle" in item.value || "employer" in item.value)
@@ -139,7 +141,7 @@ export const FormAccordion = <K extends keyof CVData>({
               const value = item.value;
               return (
                 <Item
-                  id={item.id}
+                  key={uniqueKey}
                   deleteCallback={() => deleteItem(item.key, item.id)}
                   title={value.jobTitle}
                   subtitle={value.employer}
@@ -154,7 +156,7 @@ export const FormAccordion = <K extends keyof CVData>({
               const value = item.value;
               return (
                 <Item
-                  id={item.id}
+                  key={uniqueKey}
                   deleteCallback={() => deleteItem(item.key, item.id)}
                   title={value.degree}
                   subtitle={value.school}
