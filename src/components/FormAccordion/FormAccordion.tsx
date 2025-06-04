@@ -1,8 +1,8 @@
 import type { callbackProps, FormField } from "@/components";
 import React, { useState } from "react";
-import { IconButton, Form } from "@/components";
+import { IconButton, Form, Item } from "@/components";
 import "./FormAccordion.css";
-import { isExperienceInfo, type CVData } from "@/models";
+import { isEducationInfo, isExperienceInfo, type CVData } from "@/models";
 
 interface MultiDataTypes<K extends keyof CVData> {
   "1": K;
@@ -135,26 +135,31 @@ export const FormAccordion = <K extends keyof CVData>({
             if (isExperienceInfo(item.value)) {
               const value = item.value;
               return (
-                <div key={item.id} className="item-container">
-                  <IconButton
-                    type="delete"
-                    onClick={() => deleteItem(item.key, item.id)}
-                    className="delete-item"
-                  />
-                  <div className="item-title">
-                    <h2>{value.jobTitle}</h2>
-                    <p>at {value.employer}</p>
-                  </div>
-                  <div className="item-dates-place">
-                    <p>
-                      {value.startDate} - {value.finishDate}
-                    </p>
-                    <p className="place">{value.city}</p>
-                  </div>
-                  <div className="item-description">
-                    <p>{value.description}</p>
-                  </div>
-                </div>
+                <Item
+                  id={item.id}
+                  deleteCallback={() => deleteItem(item.key, item.id)}
+                  title={value.jobTitle}
+                  subtitle={value.employer}
+                  startDate={value.startDate}
+                  finishDate={value.finishDate}
+                  place={value.city}
+                  description={value.description}
+                />
+              );
+            }
+            if (isEducationInfo(item.value)) {
+              const value = item.value;
+              return (
+                <Item
+                  id={item.id}
+                  deleteCallback={() => deleteItem(item.key, item.id)}
+                  title={value.degree}
+                  subtitle={value.school}
+                  startDate={value.startDate}
+                  finishDate={value.finishDate}
+                  place={value.city}
+                  description={value.description}
+                />
               );
             }
           })}
@@ -164,7 +169,7 @@ export const FormAccordion = <K extends keyof CVData>({
               onClick={() => setEditingItem(true)}
               className="submit-button"
             >
-              <p>Add experience</p>
+              <p>Add new item</p>
             </button>
           )}
         </>
