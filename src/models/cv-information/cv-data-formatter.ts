@@ -3,6 +3,7 @@ import type { CVData, CVDataProperty } from "./cv-data";
 import type { PersonalInfo } from "./personal-info";
 import type { SummaryInfo } from "./summary-info";
 import type { ExperienceInfo } from "./experience-info";
+import type { EducationInfo } from "./education-info";
 
 export const formDataToCVData = ({
   data,
@@ -42,6 +43,22 @@ export const formDataToCVData = ({
       jobTitle: dataToFormat.jobTitle,
       city: dataToFormat.city,
       employer: dataToFormat.employer,
+      startDate: dataToFormat.startDate,
+      finishDate: dataToFormat.finishDate,
+      description: dataToFormat.description,
+    };
+  }
+
+  if (
+    dataType === "educationInfo1" ||
+    dataType === "educationInfo2" ||
+    dataType === "educationInfo3"
+  ) {
+    const dataToFormat = data as EducationInfo;
+    cvDataField = {
+      degree: dataToFormat.degree,
+      city: dataToFormat.city,
+      school: dataToFormat.school,
       startDate: dataToFormat.startDate,
       finishDate: dataToFormat.finishDate,
       description: dataToFormat.description,
