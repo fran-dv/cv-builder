@@ -1,54 +1,29 @@
-# React + TypeScript + Vite
+# CV Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-v19-blue)](https://react.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-v5-blue)](https://www.typescriptlang.org)
 
-Currently, two official plugins are available:
+A simple CV builder application built with React and TypeScript. This project is part of the [The Odin Project curriculum](https://www.theodinproject.com/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Visit the [live demo](https://cv-builder-fran-dv.netlify.app/)
 
-## Expanding the ESLint configuration
+![Site preview](/src/assets/preview.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## About the project
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+The primary goal of the project was to gain hands-on experience with the fundamentals of React, including component-based architecture and state management.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+While the original assignment was with javascript, I chose to implement it in TypeScript to follow modern development practices and improve code maintainability, type safety, and scalability. This presented me with some challenging situations from which I learned a lot.
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+## 🚀 Features
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+- Clean and intuitive user interface
+- Real-time preview of your CV
+- Responsive design that works on all devices
+
+## 🛠️ Technologies
+
+- React
+- TypeScript
+- CSS
+- Vite (Build Tool)
+- Bun (package manager)
