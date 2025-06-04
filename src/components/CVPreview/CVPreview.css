@@ -100,6 +100,10 @@
   margin-bottom: 0.5rem;
 }
 
+.summary-text {
+  margin-bottom: 0.75rem;
+}
+
 .section-item {
   display: flex;
   flex-direction: column;

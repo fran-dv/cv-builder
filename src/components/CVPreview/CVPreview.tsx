@@ -1,6 +1,12 @@
-import type { ExperienceInfo, PersonalInfo, SummaryInfo } from "@/models";
+import type {
+  EducationInfo,
+  ExperienceInfo,
+  PersonalInfo,
+  SummaryInfo,
+} from "@/models";
 import "./CVPreview.css";
-import { Icon } from "@/components";
+import { Icon, PreviewItem } from "@/components";
+import { Fragment } from "react/jsx-runtime";
 
 interface Props {
   personalInfo: PersonalInfo;
@@ -8,6 +14,9 @@ interface Props {
   experienceInfo1: ExperienceInfo;
   experienceInfo2: ExperienceInfo;
   experienceInfo3: ExperienceInfo;
+  educationInfo1: EducationInfo;
+  educationInfo2: EducationInfo;
+  educationInfo3: EducationInfo;
 }
 
 interface CVSectionProps {
@@ -31,6 +40,9 @@ export const CVPreview = ({
   experienceInfo1,
   experienceInfo2,
   experienceInfo3,
+  educationInfo1,
+  educationInfo2,
+  educationInfo3,
 }: Props) => {
   const experiences = [
     experienceInfo1,
@@ -41,6 +53,20 @@ export const CVPreview = ({
       exp &&
       (exp.jobTitle ||
         exp.employer ||
+        exp.startDate ||
+        exp.finishDate ||
+        exp.city ||
+        exp.description),
+  );
+  const educationItems = [
+    educationInfo1,
+    educationInfo2,
+    educationInfo3,
+  ].filter(
+    (exp) =>
+      exp &&
+      (exp.degree ||
+        exp.school ||
         exp.startDate ||
         exp.finishDate ||
         exp.city ||
@@ -72,7 +98,7 @@ export const CVPreview = ({
       </ul>
       {summary && (
         <CVSection title="Summary">
-          <p>{summary}</p>
+          <p className="summary-text">{summary}</p>
         </CVSection>
       )}
 
@@ -82,29 +108,41 @@ export const CVPreview = ({
             (experience, index) => {
               if (!experience) return null;
 
+              const uniqueKey = `experience-${index}-${self.crypto.randomUUID()}`;
               return (
-                <div key={`experience${index}`} className="section-item">
-                  <div className="item-heading">
-                    <div className="item-title">
-                      <h4>{experience.jobTitle}</h4>
-                      <p>
-                        {experience.employer ? `at ${experience.employer}` : ""}
-                      </p>
-                    </div>
+                <Fragment key={uniqueKey}>
+                  <PreviewItem
+                    title={experience.jobTitle}
+                    subtitle={experience.employer}
+                    startDate={experience.startDate}
+                    finishDate={experience.finishDate}
+                    place={experience.city}
+                    description={experience.description}
+                  />
+                </Fragment>
+              );
+            },
+          )}
+        </CVSection>
+      )}
+      {educationItems.length > 0 && (
+        <CVSection title="Education">
+          {[educationInfo1, educationInfo2, educationInfo3].map(
+            (education, index) => {
+              if (!education) return null;
 
-                    <div className="item-place-dates">
-                      <p>
-                        {experience.startDate
-                          ? `${experience.startDate} - `
-                          : ""}{" "}
-                        {experience.finishDate}
-                      </p>
-                      <p className="item-place">{experience.city}</p>
-                    </div>
-                  </div>
-
-                  <p>{experience.description}</p>
-                </div>
+              const uniqueKey = `experience-${index}-${self.crypto.randomUUID()}`;
+              return (
+                <Fragment key={uniqueKey}>
+                  <PreviewItem
+                    title={education.degree}
+                    subtitle={education.school}
+                    startDate={education.startDate}
+                    finishDate={education.finishDate}
+                    place={education.city}
+                    description={education.description}
+                  />
+                </Fragment>
               );
             },
           )}

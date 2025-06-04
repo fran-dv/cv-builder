@@ -138,6 +138,21 @@ export const CVBuilder = () => {
             ? CVCurrentPreviewData.experienceInfo3
             : {}
         }
+        educationInfo1={
+          CVCurrentPreviewData.educationInfo1
+            ? CVCurrentPreviewData.educationInfo1
+            : {}
+        }
+        educationInfo2={
+          CVCurrentPreviewData.educationInfo2
+            ? CVCurrentPreviewData.educationInfo2
+            : {}
+        }
+        educationInfo3={
+          CVCurrentPreviewData.educationInfo3
+            ? CVCurrentPreviewData.educationInfo3
+            : {}
+        }
       />
     </div>
   );
