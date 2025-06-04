@@ -6,3 +6,4 @@ export * from "./CVBuilder";
 export * from "./Form";
 export * from "./FormAccordion";
 export * from "./SummaryInfoBlock";
+export * from "./ExperiencesInfoBlock";
