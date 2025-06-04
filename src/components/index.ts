@@ -7,3 +7,4 @@ export * from "./Form";
 export * from "./FormAccordion";
 export * from "./SummaryInfoBlock";
 export * from "./ExperiencesInfoBlock";
+export * from "./Item";
