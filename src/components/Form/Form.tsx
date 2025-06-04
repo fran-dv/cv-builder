@@ -1,6 +1,6 @@
 import type { callbackProps } from "@/components";
 import type { CVData, CVDataPropertyKeys } from "@/models";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 
 export interface FormField {
   id: string;
@@ -11,13 +11,17 @@ export interface FormField {
   required?: boolean;
 }
 
+export const FormFieldTypes = {
+  text: "text",
+  textarea: "textarea",
+} as const;
+
 interface Props<K extends keyof CVData> {
   fields: FormField[];
   dataType: K;
   onChange: ({ data, dataType }: callbackProps) => void;
   onSubmit: ({ data, dataType }: callbackProps) => void;
   currentData: CVData;
-  exited: boolean;
 }
 
 export const Form = <K extends keyof CVData>({
@@ -26,10 +30,14 @@ export const Form = <K extends keyof CVData>({
   onChange,
   onSubmit,
   currentData,
-  exited,
 }: Props<K>) => {
   const initialValues = {};
   const [formValues, setFormValues] = useState<CVData[K]>(initialValues);
+
+  useEffect(() => {
+    // populate formValues from currentData[dataType] exactly once, when `exited` flips true
+    setFormValues(currentData[dataType]);
+  }, [dataType, currentData]);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -44,10 +52,6 @@ export const Form = <K extends keyof CVData>({
     e.preventDefault();
     onSubmit({ data: formValues, dataType: dataType });
   };
-
-  if (exited) {
-    setFormValues(currentData[dataType]);
-  }
 
   return (
     <>
@@ -79,6 +83,8 @@ export const Form = <K extends keyof CVData>({
                     cols={10}
                     style={{ resize: "none" }}
                   />
+                ) : field.type === "date" ? (
+                  <div></div>
                 ) : (
                   <input
                     type={field.type}
