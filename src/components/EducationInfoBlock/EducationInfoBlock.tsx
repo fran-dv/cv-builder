@@ -84,7 +84,7 @@ export const EducationInfoBlock = ({
       title="Education"
       isActive={isActive}
       onShow={onShow}
-      blockIcon={<Icon type="experience" />}
+      blockIcon={<Icon type="education" />}
       currentData={currentData}
       multiItems={true}
     />
