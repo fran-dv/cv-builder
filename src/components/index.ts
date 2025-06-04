@@ -9,3 +9,4 @@ export * from "./SummaryInfoBlock";
 export * from "./ExperiencesInfoBlock";
 export * from "./Item";
 export * from "./EducationInfoBlock";
+export * from "./PreviewItem";
