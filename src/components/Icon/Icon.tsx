@@ -9,6 +9,7 @@ interface IconsFiles {
   summary: string;
   delete: string;
   experience: string;
+  education: string;
 }
 
 const IconsFileNames: IconsFiles = {
@@ -22,6 +23,7 @@ const IconsFileNames: IconsFiles = {
   summary: "summary-icon.svg",
   delete: "delete-icon.svg",
   experience: "experience-icon.svg",
+  education: "education-icon.svg",
 } as const;
 
 export type IconsTypes = keyof IconsFiles;
