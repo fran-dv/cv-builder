@@ -4,7 +4,7 @@ import type { CVData, CVDataPropertyKeys } from "@/models";
 
 interface Props {
   onChange: ({ data }: callbackProps) => void;
-  onSubmit: ({ data }: callbackProps) => void;
+  onSubmit: () => void;
   onExitWithoutSubmit: () => void;
   isActive: boolean;
   onShow: () => void;
