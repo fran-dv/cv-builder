@@ -7,6 +7,8 @@ interface IconsFiles {
   arrowDown: string;
   person: string;
   summary: string;
+  delete: string;
+  experience: string;
 }
 
 const IconsFileNames: IconsFiles = {
@@ -18,6 +20,8 @@ const IconsFileNames: IconsFiles = {
   arrowDown: "arrow-down-icon.svg",
   person: "person-icon.svg",
   summary: "summary-icon.svg",
+  delete: "delete-icon.svg",
+  experience: "experience-icon.svg",
 } as const;
 
 export type IconsTypes = keyof IconsFiles;
